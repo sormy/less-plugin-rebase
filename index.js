@@ -1,4 +1,4 @@
-var RebaseLessProcessor = require('./rebase-less-processor');
+var RebaseCssProcessor = require('./rebase-css-processor');
 
 function LessPluginRebase(options) {
     this.options = options;
@@ -6,9 +6,9 @@ function LessPluginRebase(options) {
 
 LessPluginRebase.prototype = {
     install: function(less, pluginManager) {
-        pluginManager.addPostProcessor(new RebaseLessProcessor(this.options));
+        pluginManager.addPostProcessor(new RebaseCssProcessor(this.options));
     },
-    minVersion: [0, 0, 1]
+    minVersion: [1, 0, 0]
 };
 
 module.exports = LessPluginRebase;

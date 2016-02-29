@@ -1,6 +1,6 @@
 {
     "name": "less-plugin-rebase",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "rebase plugin for less.js based on clean-css plugin",
     "homepage": "",
     "author": {
