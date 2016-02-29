@@ -1,0 +1,38 @@
+{
+    "name": "less-plugin-rebase",
+    "version": "0.0.1",
+    "description": "rebase plugin for less.js based on clean-css plugin",
+    "homepage": "",
+    "author": {
+        "name": "Artem Petrov"
+    },
+    "contributors": [
+        "Ecentria"
+    ],
+    "bugs": {
+        "url": "https://github.com/ecentria/less-plugin-rebase/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ecentria/less-plugin-rebase.git"
+    },
+    "licenses": [
+        {
+            "type": "Apache v2",
+            "url": "https://github.com/ecentria/less-plugin-rebase/blob/master/LICENSE"
+        }
+    ],
+    "main": "lib/index.js",
+    "engines": {
+        "node": ">=0.4.2"
+    },
+    "dependencies": {
+        "clean-css": "^3.0.1"
+    },
+    "devDependencies": {
+    },
+    "keywords": [
+        "less plugins",
+        "less rebase"
+    ]
+}
