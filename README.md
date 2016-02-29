@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                 }],
                 options: {
                     plugins: [
-                        (new require('less-plugin-rebase'))({
+                        new (require('less-plugin-rebase'))({
                             rebase: true,
                             relativeTo: './layout/store/desktop/css/public',
                             target: './layout/css/store'
