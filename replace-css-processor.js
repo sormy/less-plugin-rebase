@@ -47,7 +47,7 @@ function replaceUriPrefix(uri, options)
         resolvedUri = uri;
     for (var i = 0; i < length; i++) {
         replaceTo = options.replaceTo[i];
-        replaceFromReg = new RegExp('^' + options.replaceFrom[i].replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+        replaceFromReg = new RegExp(options.replaceFrom[i].replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
         if (replaceFromReg.test(resolvedUri)) {
             return resolvedUri.replace(replaceFromReg, replaceTo);
         }
@@ -56,13 +56,17 @@ function replaceUriPrefix(uri, options)
 }
 
 function replace(uri, options) {
-    if (isAbsolute(uri) || isSVGMarker(uri) || isEscaped(uri) || isInternal(uri) || isImport(uri) || isRemote(uri))
+    if (isAbsolute(uri) || isSVGMarker(uri) || isEscaped(uri) || isInternal(uri) || /*isImport(uri) || */isRemote(uri))
         return uri;
 
     if (isData(uri))
         return '\'' + uri + '\'';
 
-    return path.relative(options.fromBase, replaceUriPrefix(path.join(options.fromBase || '', uri), options));
+    if (options.fromBase === false) {
+        return replaceUriPrefix(uri, options);
+    } else {
+        return path.relative(options.fromBase, replaceUriPrefix(path.join(options.fromBase || '', uri), options));
+    }
 }
 
 function quoteFor(url) {
@@ -78,10 +82,11 @@ function quoteFor(url) {
 
 function RebaseCssProcessor(options) {
     this.options = {
-        fromBase: options.relativeTo,
+        fromBase: options.relativeTo || false,
         replaceFrom: options.replaceFrom || [],
         replaceTo: options.replaceTo || [],
-        urlQuotes: options.urlQuotes || false
+        urlQuotes: options.urlQuotes || false,
+        isPreProcessor: options.isPreProcessor || false
     };
     this.context = {
         warnings: []
@@ -90,7 +95,11 @@ function RebaseCssProcessor(options) {
 
 RebaseCssProcessor.prototype = {
     install: function (less, pluginManager) {
-        pluginManager.addPostProcessor(this);
+        if (this.options.isPreProcessor) {
+            pluginManager.addPreProcessor(this);
+        } else {
+            pluginManager.addPostProcessor(this);
+        }
     },
     process: function (css) {
         var options = this.options;
