@@ -7,7 +7,7 @@ Rebases urls in the css output using functions from [clean-css](https://github.c
 Install the modules
 ```shell
 npm install --save-dev gulp-less
-npm install --save-dev git://github.com/sormy/less-plugin-rebase.git#1.0.0
+npm install --save-dev git://github.com/sormy/less-plugin-rebase.git
 ```
 
 Configure gulpfile.js
@@ -57,7 +57,7 @@ gulp.task('build-bootstrap', function() {
 Install the modules
 ```shell
 npm install --save-dev grunt-contrib-less
-npm install --save-dev git://github.com/ecentria/less-plugin-rebase.git#1.0.0
+npm install --save-dev git://github.com/ecentria/less-plugin-rebase.git
 ```
 
 Configure Gruntfile.js
